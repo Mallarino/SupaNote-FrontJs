@@ -2,17 +2,29 @@ import React, { useState } from 'react'
 import SupaNoteIcon from '../assets/SupaNoteIcon.jpeg'
 import LoginImg from '../assets/undraw_creative-flow_t3kz.svg'
 import { Link, useNavigate } from "react-router-dom"
+import {  useAuthContext } from '../context/AuthContext'
+import { login } from '../services/authService'
 
 export default function Login() {
+
+  const { authenticated, setAuthenticated } = useAuthContext();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) =>{
+  const handleSubmit = async (e) =>{
     e.preventDefault();
+    try {
+      await login({ email, password });
+      alert("Inicio de sesion exitoso");
+      setAuthenticated(true);
 
+    } catch (error) {
+      alert("Usuario o contraseña incorrectos");
+      console.error(error);
+    }
+    
   }
-
 
   return (
     <>
