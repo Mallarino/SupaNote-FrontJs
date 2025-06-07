@@ -3,53 +3,49 @@ import axios from "axios";
 const API_URL = "http://localhost:8080/auth"
 
 export const login = async (credentials) => {
-    try {
-        const response = await fetch(`${API_URL}/login`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(credentials),
-        });
+  try {
+    const response = await axios.post(`${API_URL}/login`, credentials, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-        //si la respuesta no es 200ok
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || "Error al iniciar sesión");
-        }
+    const data = response.data;
 
-        const data = await response.json();
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("User", JSON.stringify(data.user))
-        return data;
-    } catch (error) {
-        console.error("Error en login:", error.message);
-        throw error;
-    }
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("User", JSON.stringify(data.user));
+
+    return data;
+  } catch (error) {
+    // Axios guarda el mensaje del backend en error.response.data
+    const errorMessage =
+      error.response?.data?.message || "Error al iniciar sesión";
+    console.error("Error en login:", errorMessage);
+    throw new Error(errorMessage);
+  }
 };
 
 export const register = async (credentials) => {
+  try {
+    const response = await axios.post(`${API_URL}/register`, credentials, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-    try {
-        const response = await fetch(`${API_URL}/register`, {
-            method: "POST",
-            headers: { "content-Type": "application/json" },
-            body: JSON.stringify(credentials)
-        })
+    const data = response.data;
 
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || "Error al crear cuenta")
-        }
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("User", JSON.stringify(data.user));
 
-        const data = await response.json();
-        localStorage.setItem("token", data.token)
-        localStorage.setItem("User", JSON.stringify(data.user))
-
-    } catch (error) {
-        console.error("Error al crear cuenta:", error.message);
-        throw error
-    }
-
-}
+    return data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message || "Error al crear cuenta";
+    console.error("Error al crear cuenta:", errorMessage);
+    throw new Error(errorMessage);
+  }
+};
 
 
 export const logout = () => {

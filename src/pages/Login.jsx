@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import SupaNoteIcon from '../assets/SupaNoteIcon.jpeg'
 import LoginImg from '../assets/undraw_creative-flow_t3kz.svg'
 import { Link, useNavigate } from "react-router-dom"
-import { login } from '../services/authService'
-import { toast } from 'react-toastify'
 import { useAuth } from '../hooks/useAuth'
 
 export default function Login() {

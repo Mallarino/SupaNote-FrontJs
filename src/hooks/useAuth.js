@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { login } from "../services/authService";
 
+//Hook para manejar Login y Register
 export function useAuth() {
   const navigate = useNavigate();
 
