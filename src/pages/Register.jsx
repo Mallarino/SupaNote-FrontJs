@@ -2,31 +2,12 @@ import React, { useState } from 'react'
 import SupaNoteIcon from '../assets/SupaNoteIcon.jpeg'
 import LoginImg from '../assets/undraw_welcoming_42an.svg'
 import { Link, useNavigate } from "react-router-dom"
-import { register } from '../services/authService'
-import {  useAuthContext } from '../context/AuthContext'
+import Spinner from '../utils/spinner'
+import { useAuth } from '../hooks/useAuth'
 
 export default function Register() {
 
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
-  const { authenticated, setAuthenticated } = useAuthContext();
-
-  const handleSubmit = async (e) => {
-    
-    e.preventDefault();
-    try {
-      await register({ email, username, password });
-      alert("Registro exitoso");
-      setAuthenticated(true);
-
-    } catch (error) {
-      alert("Error al crear cuenta");
-      console.error(error);
-    }
-
-  }
+  const { email, setEmail, password, setPassword, username, setUsername, loading, SubmitRegister } = useAuth();
 
   return (
     <>
@@ -38,7 +19,7 @@ export default function Register() {
             Already a member? <Link to="/login" className='text-[#4169E1] font-bold'>Log in</Link>
           </h3>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-6 items-center">
+          <form onSubmit={SubmitRegister} className="flex flex-col gap-6 items-center">
             <input
               type="text"
               className="form-control w-80 max-w-sm p-3 rounded-lg bg-gray-200 text-black"
@@ -71,9 +52,10 @@ export default function Register() {
 
             <button
               type='submit'
-              className="bg-black hover:bg-[#4169E1] text-black py-3 px-6 rounded-xl w-60 text-white"
+              disabled={loading}
+              className="bg-black hover:bg-[#4169E1] text-black py-3 px-6 rounded-xl w-60 text-white flex justify-center items-center"
             >
-              Create account
+              {loading ? <Spinner /> : "Create account"}
             </button>
           </form>
         </div>
