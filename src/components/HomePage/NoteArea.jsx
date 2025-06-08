@@ -3,6 +3,7 @@ import { getNotes } from '../../services/noteService'
 import Spinner from '../../utils/Spinner';
 import ConfimrModal from '../ConfirmModal';
 import NoteView from '../Notes/NoteView';
+import { toast } from 'react-toastify';
 
 export default function NoteArea() {
 
@@ -15,8 +16,8 @@ export default function NoteArea() {
         setLoading(true);
         const notes = await getNotes();
         setNotes(notes);
-        console.log(notes);
       } catch (error) {
+        toast.error("Error loading notes")
         console.log(error);
       } finally {
         setLoading(false);
@@ -28,7 +29,9 @@ export default function NoteArea() {
 
   return (
     <div className='flex flex-1 flex-wrap gap-10 bg-gray-300 p-4 rounded-tl-lg'>
-      <NoteView />
+      {loading ? <Spinner /> : (notes.map((note) => (
+          <NoteView key={note.id} note={note} />
+      )))}
     </div>
   )
 }
