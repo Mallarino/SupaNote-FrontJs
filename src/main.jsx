@@ -2,14 +2,14 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import AppRoutes from './routes/Routes'
-import { AuthProvider } from './context/AuthContext'
+import { NotesProvider } from './context/NoteContext'
 import { ToastContainer } from 'react-toastify'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
+    <NotesProvider>
       <AppRoutes />
-    </AuthProvider>
-    <ToastContainer position='top-center' autoClose={3000}/>
+    </NotesProvider>
+    <ToastContainer position='top-center' autoClose={2000}/>
   </StrictMode>,
 )

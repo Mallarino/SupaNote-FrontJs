@@ -2,7 +2,7 @@ import React, { use, useEffect, useState } from 'react'
 import SupaNoteImg from '../../assets/SupaNoteIcon.jpeg'
 import { useNavigate } from 'react-router-dom'
 import { getUserName, logout } from '../../services/authService'
-import ConfimrModal from '../ConfirmModal'
+import ConfirmModal from '../ConfirmModal'
 import { toast } from 'react-toastify'
 import NavbarMenu from '../../utils/Menus/NavbarMenu'
 
@@ -43,7 +43,15 @@ export default function Navbar() {
         </div>
       </div>
 
-      <ConfimrModal open={open} setOpen={setOpen} onClick={handleLogout} />
+      <ConfirmModal 
+      open={open} 
+      setOpen={setOpen} 
+      onClick={handleLogout}
+      title={"Logout"}
+      message={"Are you sure you want to log out ?"} 
+      cancelButton={"Cancel"}
+      actionButton={"Logout"}
+      />
     </>
   )
 }
