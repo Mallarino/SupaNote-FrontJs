@@ -44,7 +44,7 @@ export const createNote = async (note) => {
 export const updateNote = async (noteId, note) => {
     const token = getToken();
     try {
-        const response = await axios.post(`${API_URL}/${noteId}`, note, {
+        const response = await axios.put(`${API_URL}/${noteId}`, note, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },

@@ -8,7 +8,7 @@ export default function NoteModal({ color, open, setOpen }) {
     const { clearModal, handleNewNote, title, setTitle, content, setContent, setNoteColor } = useNote();
 
     useEffect(() => {
-        setNoteColor(color)
+        setNoteColor(color);
     }, [color])
 
     const onCreate = () =>{

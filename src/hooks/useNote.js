@@ -1,13 +1,12 @@
 import { use, useState } from "react";
-import { createNote, deleteNote, getNotes } from "../services/noteService";
+import { createNote, deleteNote, getNotes, updateNote } from "../services/noteService";
 import { useNavigate } from "react-router-dom";
 import { useNotesContext } from '../context/NoteContext';
 import { toast } from "react-toastify";
 
 export function useNote() {
-    const navigate = useNavigate();
 
-    const {notes, setNotes, setShouldRefresh} = useNotesContext();
+    const { setShouldRefresh } = useNotesContext();
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [noteColor, setNoteColor] = useState("");
@@ -30,6 +29,19 @@ export function useNote() {
 
     }
 
+    const handleUpdateNote = async (noteid) => {
+        try {
+            const updatedNote = { noteColor, title, content }            
+            await updateNote(noteid, updatedNote);
+            setShouldRefresh(true);
+            clearModal();
+            toast.success("Note updated");
+        } catch (error) {
+            toast.error(error.message)
+        }
+
+    }
+
     const handleDeleteNote = async (noteid) => {
         try {
             await deleteNote(noteid);
@@ -46,6 +58,7 @@ export function useNote() {
     return {
         clearModal,
         handleNewNote,
+        handleUpdateNote,
         handleDeleteNote,
         title,
         setTitle,

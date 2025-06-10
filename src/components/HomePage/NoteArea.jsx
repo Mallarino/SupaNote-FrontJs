@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getNotes } from '../../services/noteService'
 import Spinner from '../../utils/Spinner';
 import NoteView from '../Notes/NoteView';
