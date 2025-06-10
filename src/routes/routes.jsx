@@ -5,11 +5,20 @@ import Register from "../pages/Register.jsx";
 import PageNotFound from "../pages/PageNotFound.jsx";
 import Home from "../pages/Home.jsx";
 
-import { getToken } from "../services/authService.js";
+import { getToken, isTokenExpired } from "../services/authService.js";
 
 const PrivateRoute = ({ children }) => {
+  
   const token = getToken();
-  return token ? children : <Navigate to="/login" />;
+
+  if (!token || isTokenExpired(token)) {
+    localStorage.removeItem("token")
+    localStorage.removeItem("User")
+    return <Navigate to="/login" />;  
+  } 
+  
+  return children
+  
 };
 
 const AppRoutes = () => {

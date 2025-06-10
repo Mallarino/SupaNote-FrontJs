@@ -1,4 +1,5 @@
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const API_URL = "http://localhost:8080/auth"
 
@@ -60,3 +61,13 @@ export const getUserName = () => {
     const user = JSON.parse(localStorage.getItem("User"));
     return user.username
 }
+
+export const isTokenExpired = (token) => {
+  try {
+    const decoded = jwtDecode(token);
+    const currentTime = Date.now() / 1000; // en segundos
+    return decoded.exp < currentTime;
+  } catch (error) {
+    return true; // Si no se puede decodificar, lo consideramos inválido
+  }
+};

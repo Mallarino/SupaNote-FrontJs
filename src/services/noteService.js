@@ -16,7 +16,6 @@ export const getNotes = async () => {
         const data = response.data;
         return data;
     } catch (error) {
-        // Axios guarda el mensaje del backend en error.response.data
         const errorMessage =
             error.response?.data?.message || "Error loading notes";
         throw new Error(errorMessage);
@@ -75,4 +74,6 @@ export const deleteNote = async (noteId) => {
     }
 
 };
+
+
 
