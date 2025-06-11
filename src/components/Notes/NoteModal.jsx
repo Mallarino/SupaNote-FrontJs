@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle, Textarea } from '@headlessui/react'
 import { useNote } from '../../hooks/useNote'
+import { toast } from 'react-toastify';
 
 
 export default function NoteModal({ color, open, setOpen }) {
@@ -10,6 +11,12 @@ export default function NoteModal({ color, open, setOpen }) {
     useEffect(() => {
         setNoteColor(color);
     }, [color])
+
+    useEffect(() => {
+        if (title.length == 100) {
+            toast.info("Title max leght reached!")
+        }
+    }, [title])
 
     const onCreate = () =>{
         setOpen(false);
@@ -39,6 +46,7 @@ export default function NoteModal({ color, open, setOpen }) {
                                             className="flex-1 font-bold text-lg"
                                             id="title"
                                             value={title}
+                                            maxLength={100}
                                             onChange={(e) => setTitle(e.target.value)}
                                             placeholder="Title"
                                             rows={1}
@@ -51,6 +59,7 @@ export default function NoteModal({ color, open, setOpen }) {
                                             className="flex-1 text-lg"
                                             id="content"
                                             value={content}
+                                            maxLength={100}
                                             onChange={(e) => setContent(e.target.value)}
                                             placeholder="Write something..."
                                             rows={4}

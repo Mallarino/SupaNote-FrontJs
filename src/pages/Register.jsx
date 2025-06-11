@@ -11,7 +11,7 @@ export default function Register() {
 
   return (
     <>
-      <div className="flex flex-col md:flex flex-row min-h-screen">
+      <div className="p-2 md:flex flex-row min-h-screen">
         <div className="flex flex-col items-center justify-center gap-7 w-full md: w-1/2">
           <img src={SupaNoteIcon} alt="SupaNote Icon" className="h-20" />
           <h1 className="text-3xl font-bold">Create new account</h1>

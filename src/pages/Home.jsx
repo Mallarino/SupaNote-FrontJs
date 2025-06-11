@@ -12,7 +12,7 @@ export default function Home() {
       <Navbar />
 
       {/* Contenido debajo del Navbar */}
-      <div className="flex flex-1">
+      <div className="md:flex flex-1">
         {/* Sidebar a la izquierda */}
         <SideBar />
 

@@ -15,7 +15,6 @@ export default function NoteView({ note }) {
 
   const { noteColor, setNoteColor, title, setTitle, content, setContent, handleUpdateNote } = useNote();
 
-
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto'; 

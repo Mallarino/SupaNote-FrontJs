@@ -31,17 +31,17 @@ export default function Navbar() {
 
   return (
     <>
-      <div id='navbar' className='flex justify-between h-15 mx-5 my-5 '>
+      <div className='flex justify-between h-15 my-5'>
 
         <div className='flex items-center'>
           <img src={SupaNoteImg} alt="" className='w-20' />
-          <h1 className='text-3xl font-bold'>My notes</h1>
+          <h1 className='hidden md:block text-3xl font-bold'>My notes</h1>
         </div>
 
         <input type="text" placeholder='Buscar nota' value={query} onChange={(e) => setQuery(e.target.value)} className='bg-gray-300 w-70 px-5 m-2 rounded-full' />
 
         <div className='flex m-2 gap-10 justify-center items-center'>
-          <h3 className='font-bold'>{username}</h3>
+          <h3 className='hidden md:font-bold'>{username}</h3>
           <NavbarMenu setOpen={setOpen} />
         </div>
       </div>
