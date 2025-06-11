@@ -8,56 +8,61 @@ export default function Login() {
 
   const { email, setEmail, password, setPassword, loading, SubmitLogin } = useAuth();
 
-return (
-  <>
-    <div className="flex min-h-screen">
-      {/* Lado izquierdo - Formulario */}
-      <div className="flex flex-col items-center justify-center gap-8 w-1/2">
-        <img src={SupaNoteIcon} alt="SupaNote Icon" className="h-20" />
-        <h1 className="text-3xl font-bold">Welcome Back!</h1>
-        <h3 className="text-center">
-          Simple notes, big results. <b>SupaNote</b>
-        </h3>
+  return (
+    <>
+      <div className="flex flex-col md:flex-row min-h-screen">
+        {/* Lado izquierdo - Formulario */}
+        <div className="flex flex-col items-center justify-center gap-8 w-full md: w-1/2 p-6">
+          <img src={SupaNoteIcon} alt="SupaNote Icon" className="h-16 md:h-20" />
+          <h1 className="text-2xl md:text-3xl font-bold text-center">Welcome Back!</h1>
+          <h3 className="text-center text-gray-700">
+            Simple notes, big results. <b>SupaNote</b>
+          </h3>
 
-        <form onSubmit={SubmitLogin} className="flex flex-col gap-6 items-center">
-          <input
-            type="text"
-            className="form-control w-80 max-w-sm p-3 rounded-lg bg-gray-200 text-black"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            placeholder="Enter your Email"
-          />
+          <form onSubmit={SubmitLogin} className="flex flex-col gap-6 items-center w-80 max-w-sm">
+            <input
+              type="text"
+              className="form-control w-full p-3 rounded-lg bg-gray-200 text-black"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              placeholder="Enter your Email"
+            />
 
-          <input
-            type="password"
-            className="form-control w-full max-w-sm p-3 rounded-lg bg-gray-200 text-black"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            placeholder="Enter your Password"
-          />
+            <input
+              type="password"
+              className="form-control w-full p-3 rounded-lg bg-gray-200 text-black"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              placeholder="Enter your Password"
+            />
 
-          <b>Not a member? <Link to="/register" className='text-[#4169E1]'>Register now</Link></b>
+            <b className="text-center text-sm">
+              Not a member? <Link to="/register" className="text-[#4169E1]">Register now</Link>
+            </b>
 
-          <button
-            type='submit'
-            disabled={loading}
-            className="bg-black hover:bg-[#4169E1] text-black py-3 px-6 rounded-xl w-60 text-white flex items-center justify-center"
-          >
-            {loading ? (<div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-            ) : "Login"}
-          </button>
-        </form>
+            <button
+              type="submit"
+              disabled={loading}
+              className="bg-black hover:bg-[#4169E1] text-white py-3 px-6 rounded-xl w-60"
+            >
+              {loading ? (
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mx-auto" />
+              ) : "Login"}
+            </button>
+          </form>
+        </div>
+
+        {/* Imagen derecha */}
+        <div className="hidden md:flex w-full w-1/2 items-center justify-center">
+          <img src={LoginImg} alt="Login Illustration" className="w-3/4" />
+        </div>
       </div>
 
-      <div className="w-1/2 flex items-center justify-center">
-        <img src={LoginImg} alt="Login Illustration" className="w-3/4" />
-      </div>
-    </div>
 
-  </>
-)
+    </>
+  )
 }
