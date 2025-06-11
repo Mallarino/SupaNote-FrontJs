@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import SupaNoteIcon from '../assets/SupaNoteIcon.jpeg'
 import LoginImg from '../assets/undraw_welcoming_42an.svg'
 import { Link, useNavigate } from "react-router-dom"
-import Spinner from '../utils/spinner'
+import Spinner from '../utils/Spinner'
 import { useAuth } from '../hooks/useAuth'
 
 export default function Register() {
