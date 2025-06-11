@@ -1,4 +1,4 @@
-import { use, useState } from "react";
+import { use, useState, useEffect } from "react";
 import { createNote, deleteNote, getNotes, updateNote } from "../services/noteService";
 import { useNavigate } from "react-router-dom";
 import { useNotesContext } from '../context/NoteContext';
@@ -6,10 +6,49 @@ import { toast } from "react-toastify";
 
 export function useNote() {
 
-    const { setShouldRefresh } = useNotesContext();
+    const { query, setFilteredNotes, notes, setNotes, shouldRefresh, setShouldRefresh } = useNotesContext();
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [noteColor, setNoteColor] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const init = async () => {
+            try {
+                setLoading(true);
+                const notes = await getNotes();
+                setNotes(notes);
+                setShouldRefresh(false)
+            } catch (error) {
+                toast.error(error.message)
+            } finally {
+                setLoading(false);
+            }
+
+        };
+        init();
+        filteredNotes();
+    }, [shouldRefresh])
+
+    useEffect(() => {
+        filteredNotes();
+    }, [query])
+
+
+    const getFilteredNotes = (query, items) => {
+        if (!query) {
+            return items;
+        }
+
+        return items.filter(note =>
+            note.title.toLowerCase().includes(query.toLowerCase())
+        );
+    };
+
+    const filteredNotes = () => {
+        const filterResult = getFilteredNotes(query, notes);
+        setFilteredNotes(filterResult);
+    }
 
     const clearModal = () => {
         setTitle("");
@@ -31,7 +70,7 @@ export function useNote() {
 
     const handleUpdateNote = async (noteid) => {
         try {
-            const updatedNote = { noteColor, title, content }            
+            const updatedNote = { noteColor, title, content }
             await updateNote(noteid, updatedNote);
             setShouldRefresh(true);
             clearModal();
@@ -60,6 +99,8 @@ export function useNote() {
         handleNewNote,
         handleUpdateNote,
         handleDeleteNote,
+        filteredNotes,
+        loading,
         title,
         setTitle,
         content,
