@@ -43,7 +43,7 @@ export default function NoteModal({ color, open, setOpen }) {
                                     <div className='flex flex-row justify-between'>
                                         <Textarea
                                             type="text"
-                                            className="flex-1 font-bold text-lg"
+                                            className="flex-1 font-bold text-lg focus:outline-none focus:ring-0"
                                             id="title"
                                             value={title}
                                             maxLength={100}
@@ -56,7 +56,7 @@ export default function NoteModal({ color, open, setOpen }) {
                                     <div className='flex flex-wrap gap-4 flex-1 mb-10 mt-3'>
                                         <Textarea
                                             type="text"
-                                            className="flex-1 text-lg"
+                                            className="flex-1 text-lg focus:outline-none focus:ring-0"
                                             id="content"
                                             value={content}
                                             maxLength={100}

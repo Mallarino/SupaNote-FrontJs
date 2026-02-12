@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { login } from "../services/authService";
+import { register } from "../services/authService";
 
 //Hook para manejar Login y Register
 export function useAuth() {

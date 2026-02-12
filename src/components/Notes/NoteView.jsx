@@ -43,7 +43,7 @@ export default function NoteView({ note }) {
             disabled={!pressEdit}
             value={!pressEdit ? note.title : title}
             onChange={(e) => setTitle(e.target.value)}
-            className='flex-1 font-bold text-lg resize-none'
+            className='flex-1 font-bold text-lg resize-none focus:outline-none focus:ring-0'
           />
           {!pressEdit && <NoteViewMenu setIsEditing={setPressEdit} noteid={note.id} />}
         </div>
@@ -53,7 +53,7 @@ export default function NoteView({ note }) {
         <div className='flex-1 mb-10 mt-3'>
           <Textarea
             ref={textareaRef}
-            className='w-full resize-none'
+            className='w-full resize-none focus:outline-none focus:ring-0'
             disabled={!pressEdit}
             value={!pressEdit ? note.content : content}
             onChange={(e) => setContent(e.target.value)}
