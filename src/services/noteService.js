@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getToken } from "./authService";
 
-const API_URL = "http://localhost:8080/api/notes"
+const API_URL = "https://supanote-backend.onrender.com/api/notes"
 
 export const getNotes = async () => {
     const token = getToken();
